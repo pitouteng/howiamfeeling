@@ -1,5 +1,4 @@
 import datetime as dt
-from tzlocal import get_localzone
 from datetime import timedelta
 from pytz import timezone
 import requests
