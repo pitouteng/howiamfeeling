@@ -1,5 +1,7 @@
 import datetime as dt
 from datetime import timedelta
+
+import pytz
 from pytz import timezone
 import requests
 import base64
@@ -79,13 +81,15 @@ def get_my_spotify_recently_played_song_dict():
         song_id = item['track']['id']
         string_date = item['played_at']
         # date = get_date(string_date)
-        date = convert_my_iso_8601(string_date, timezone('EST'))
+        date = convert_my_iso_8601(string_date, timezone('US/Eastern'))
+        print('song_date')
+        print(date)
         if date.date() == get_today_date():
-            played_at = 'Today - ' + date.time().strftime('%I:%M %p') + ' EST'
-        elif date == get_yesterday_date():
+            played_at = 'Today - ' + date.strftime('%I:%M %p') + ' EST'
+        elif date.date() == get_yesterday_date():
             played_at = 'Yesterday - ' + date.time().strftime('%I:%M %p') + ' EST'
         else:
-            played_at = date
+            played_at = date.strftime('%m/%d/%Y - %I:%M %p') + ' EST'
 
         song_dict[song_id] = played_at
     return song_dict
@@ -98,11 +102,15 @@ def get_date(date_string):
 
 
 def get_today_date():
-    return dt.datetime.today().date()
+    my_date = dt.datetime.now(pytz.timezone('US/Eastern'))
+    print('my_date')
+    print(my_date)
+    return my_date.date()
 
 
 def get_yesterday_date():
-    return dt.today().date() - timedelta(days=1)
+    today = dt.datetime.now(pytz.timezone('US/Eastern'))
+    return today.date() - timedelta(days=1)
 
 
 def convert_my_iso_8601(iso_8601, tz_info):
@@ -110,4 +118,6 @@ def convert_my_iso_8601(iso_8601, tz_info):
     iso_8601 = iso_8601[:-1] + '000'
     iso_8601_dt = dt.datetime.strptime(iso_8601, '%Y-%m-%dT%H:%M:%S.%f')
     return iso_8601_dt.replace(tzinfo=timezone('UTC')).astimezone(tz_info)
+
+
 

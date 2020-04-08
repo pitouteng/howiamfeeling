@@ -135,5 +135,5 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 prod_db  =  dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 
-ALLOWED_HOSTS = ['howiamfeeling.herokuapp.com']
+ALLOWED_HOSTS = ['howiamfeeling.herokuapp.com', 'localhost', '127.0.0.1', '10834320.ngrok.io']
 django_heroku.settings(locals())
