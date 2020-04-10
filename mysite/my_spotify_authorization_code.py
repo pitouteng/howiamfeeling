@@ -82,8 +82,6 @@ def get_my_spotify_recently_played_song_dict():
         string_date = item['played_at']
         # date = get_date(string_date)
         date = convert_my_iso_8601(string_date, timezone('US/Eastern'))
-        print('song_date')
-        print(date)
         if date.date() == get_today_date():
             played_at = 'Today - ' + date.strftime('%I:%M %p') + ' EST'
         elif date.date() == get_yesterday_date():
@@ -103,8 +101,6 @@ def get_date(date_string):
 
 def get_today_date():
     my_date = dt.datetime.now(pytz.timezone('US/Eastern'))
-    print('my_date')
-    print(my_date)
     return my_date.date()
 
 

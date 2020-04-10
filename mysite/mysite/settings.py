@@ -26,7 +26,7 @@ SECRET_KEY = 'a+o8o$%#o*ne^_b8uw1o8s!qpi)8(#if#sn&uwb0bk-_q^rv(e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['howiamfeeling.herokuapp.com', 'localhost', '127.0.0.1', '10834320.ngrok.io']
 
 
 # Application definition
@@ -121,5 +121,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-ALLOWED_HOSTS = ['howiamfeeling.herokuapp.com', 'localhost', '127.0.0.1', '10834320.ngrok.io']
 django_heroku.settings(locals())
