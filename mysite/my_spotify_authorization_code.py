@@ -6,14 +6,17 @@ from pytz import timezone
 import requests
 import base64
 import six
+import configparser
 
-client_id = '84f79134cc6341df9ee8c8a43cca3ec7'
-client_secret = 'b48317acf809490db2e8b021b85ade71'
+config = configparser.ConfigParser()
+config.read('keys.ini')
+client_id = config.get('keys', 'client_id')
+client_secret = config.get('keys', 'client_secret')
+refresh_token = config.get('keys', 'refresh_token')
 
 basic_code = base64.b64encode(six.text_type(client_id + ':' + client_secret).encode('ascii'))
 basic_code = basic_code.decode('ascii')
 
-refresh_token = 'AQCY4DKQcCvcet5-QoGPNci-__YH72hwQoLANfLhg0DR7gZbFDgkguuF-EjFphu_7iFVVfxVPRt83lCLRS-872WN_Pofbya2TtYcpnbPxKioWe91GjDhzAW09Efmad0x6f4'
 
 redirect_uri = 'https://pitouteng.github.io/blank_html/'
 
